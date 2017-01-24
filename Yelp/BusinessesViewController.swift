@@ -20,6 +20,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     var offset = 20
     
+    var isSearching = false
+    
+    var searchBar: UISearchBar!
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -37,7 +41,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         // create the search bar programatically since you won't be
         // able to drag one onto the navigation bar
-        let searchBar = UISearchBar()
+        searchBar = UISearchBar()
         searchBar.sizeToFit()
         
         // The delegate property of search bar must be set to an object that implements UISearchBarDelegate
@@ -107,8 +111,26 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearching = true
+        print("isSearching: \(isSearching)")
+        self.searchBar.showsCancelButton = true
         
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isSearching = false
+        print("isSearching: \(isSearching)")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("isSearching: \(isSearching)")
         // When there is no text, filteredData is the same as the original data
         // When user has entered text into the search box
         // Use the filter method to iterate over all items in the data array
@@ -125,7 +147,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Handle scroll behavior here
-        if (!isMoreDateLoading) {
+        if (!isMoreDateLoading && !isSearching) {
             // Calculate the position of one screen length before the bottom of the results
             let scrollViewContentHeight = tableView.contentSize.height
             let scrollViewOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
