@@ -167,6 +167,21 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let business = filteredBusinesses![indexPath!.row]
+        
+        let detailViewController = segue.destination as! DetailViewController
+        
+        detailViewController.business = business
+        
+        detailViewController.navigationItem.title = business.name! as String
+        
+        // Deselect collection view after segue
+        self.tableView.deselectRow(at: indexPath!, animated: true)
+    }
 
     
     /*

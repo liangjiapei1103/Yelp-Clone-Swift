@@ -105,6 +105,7 @@
                                             <outlet property="ratingImageView" destination="Bdg-9Z-FJZ" id="xrf-fm-MFB"/>
                                             <outlet property="restaurantImageView" destination="IDi-CZ-vRk" id="VSp-Y9-U7z"/>
                                             <outlet property="reviewCountLabel" destination="6pb-iC-dUW" id="enW-2I-KQj"/>
+                                            <segue destination="ayb-s6-eco" kind="show" identifier="showDetail" id="PmU-zm-JWR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -126,6 +127,140 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2694.202898550725" y="357.88043478260875"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="RVI-nq-6ul">
+            <objects>
+                <viewController id="ayb-s6-eco" customClass="DetailViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L6U-jv-vhi"/>
+                        <viewControllerLayoutGuide type="bottom" id="sIE-rj-RE0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bGV-si-PfB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peL-1A-V2r">
+                                <rect key="frame" x="0.0" y="64" width="414" height="246"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="246" id="gpU-dP-lPD"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yori" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPG-Ef-JGV">
+                                <rect key="frame" x="20" y="318" width="34" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YX6-iH-XLs">
+                                <rect key="frame" x="20" y="350" width="111" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="111" id="MWf-At-zXK"/>
+                                    <constraint firstAttribute="height" constant="19" id="bny-Yc-GDc"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="230 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFd-da-jjt">
+                                <rect key="frame" x="154" y="351" width="77" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.42128906249999998" green="0.42128906249999998" blue="0.42128906249999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bars, American (New)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFg-HW-Flo">
+                                <rect key="frame" x="20" y="377" width="132" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.42128906249999998" green="0.42128906249999998" blue="0.42128906249999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0.8mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptP-Wk-DPf">
+                                <rect key="frame" x="360" y="322" width="34" height="15.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.42128906249999998" green="0.42128906249999998" blue="0.42128906249999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kh0-ke-Xdi">
+                                <rect key="frame" x="0.0" y="401" width="414" height="193"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="193" id="Euc-2T-KVJ"/>
+                                </constraints>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="564 4th St, SoMa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQX-dz-D9g">
+                                <rect key="frame" x="20" y="602" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YX6-iH-XLs" firstAttribute="top" secondItem="PPG-Ef-JGV" secondAttribute="bottom" constant="8" id="3wT-Nt-e9m"/>
+                            <constraint firstItem="YX6-iH-XLs" firstAttribute="leading" secondItem="PPG-Ef-JGV" secondAttribute="leading" id="7pz-iy-iNO"/>
+                            <constraint firstItem="sQX-dz-D9g" firstAttribute="top" secondItem="kh0-ke-Xdi" secondAttribute="bottom" constant="8" id="8KB-Ce-VIN"/>
+                            <constraint firstItem="peL-1A-V2r" firstAttribute="top" secondItem="L6U-jv-vhi" secondAttribute="bottom" id="Abn-WI-sLJ"/>
+                            <constraint firstAttribute="trailing" secondItem="ptP-Wk-DPf" secondAttribute="trailing" constant="20" id="DDg-zl-KvS"/>
+                            <constraint firstAttribute="trailing" secondItem="kh0-ke-Xdi" secondAttribute="trailing" id="Emq-at-hcG"/>
+                            <constraint firstItem="hFg-HW-Flo" firstAttribute="leading" secondItem="YX6-iH-XLs" secondAttribute="leading" id="F6z-Vw-dSW"/>
+                            <constraint firstItem="AFd-da-jjt" firstAttribute="centerY" secondItem="YX6-iH-XLs" secondAttribute="centerY" id="FXD-vC-P95"/>
+                            <constraint firstAttribute="trailing" secondItem="peL-1A-V2r" secondAttribute="trailing" id="I0I-49-nWI"/>
+                            <constraint firstItem="ptP-Wk-DPf" firstAttribute="top" secondItem="peL-1A-V2r" secondAttribute="bottom" constant="12" id="ICg-gQ-6Bc"/>
+                            <constraint firstItem="AFd-da-jjt" firstAttribute="leading" secondItem="YX6-iH-XLs" secondAttribute="trailing" constant="23" id="PxP-qi-bEc"/>
+                            <constraint firstItem="hFg-HW-Flo" firstAttribute="top" secondItem="YX6-iH-XLs" secondAttribute="bottom" constant="8" id="S5I-ZV-XKe"/>
+                            <constraint firstItem="PPG-Ef-JGV" firstAttribute="leading" secondItem="bGV-si-PfB" secondAttribute="leading" constant="20" id="Zww-Wu-rIz"/>
+                            <constraint firstItem="kh0-ke-Xdi" firstAttribute="top" secondItem="hFg-HW-Flo" secondAttribute="bottom" constant="8" id="a4a-bp-Bt1"/>
+                            <constraint firstItem="ptP-Wk-DPf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PPG-Ef-JGV" secondAttribute="trailing" constant="8" id="eLr-km-9bb"/>
+                            <constraint firstItem="sQX-dz-D9g" firstAttribute="leading" secondItem="bGV-si-PfB" secondAttribute="leading" constant="20" id="hNh-qb-yKg"/>
+                            <constraint firstItem="peL-1A-V2r" firstAttribute="leading" secondItem="bGV-si-PfB" secondAttribute="leading" id="oDY-sI-DH9"/>
+                            <constraint firstAttribute="trailing" secondItem="sQX-dz-D9g" secondAttribute="trailing" constant="20" id="p24-4B-K04"/>
+                            <constraint firstItem="PPG-Ef-JGV" firstAttribute="top" secondItem="peL-1A-V2r" secondAttribute="bottom" constant="8" id="yrp-hi-ZAc"/>
+                            <constraint firstItem="kh0-ke-Xdi" firstAttribute="leading" secondItem="bGV-si-PfB" secondAttribute="leading" id="zIu-kB-saV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="sQX-dz-D9g" id="Y6E-Oz-jn6"/>
+                        <outlet property="categoriesLabel" destination="hFg-HW-Flo" id="Cij-0v-qlb"/>
+                        <outlet property="distanceLabel" destination="ptP-Wk-DPf" id="71p-mh-spj"/>
+                        <outlet property="mapView" destination="kh0-ke-Xdi" id="vXG-xl-MTQ"/>
+                        <outlet property="nameLabel" destination="PPG-Ef-JGV" id="ihf-tm-vBI"/>
+                        <outlet property="ratingImageView" destination="YX6-iH-XLs" id="hJj-sP-ecm"/>
+                        <outlet property="restaurantImageView" destination="peL-1A-V2r" id="ZmN-Bw-3uz"/>
+                        <outlet property="reviewCountLabel" destination="AFd-da-jjt" id="vYi-YN-c3F"/>
+                        <segue destination="9zG-Jm-haV" kind="show" identifier="showMap" id="51D-Iu-xBN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gmu-BQ-NyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3437.68115942029" y="357.88043478260875"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="CaM-L2-o6N">
+            <objects>
+                <viewController id="9zG-Jm-haV" customClass="MapViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NBd-Sm-c62"/>
+                        <viewControllerLayoutGuide type="bottom" id="hpH-tQ-NLi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VvS-dS-Ygc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EYa-Iv-XCB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EYa-Iv-XCB" firstAttribute="top" secondItem="VvS-dS-Ygc" secondAttribute="top" id="Hy1-6G-C4f"/>
+                            <constraint firstItem="hpH-tQ-NLi" firstAttribute="top" secondItem="EYa-Iv-XCB" secondAttribute="bottom" id="Vlp-uq-fmO"/>
+                            <constraint firstAttribute="trailing" secondItem="EYa-Iv-XCB" secondAttribute="trailing" id="YN6-vJ-qmU"/>
+                            <constraint firstItem="EYa-Iv-XCB" firstAttribute="leading" secondItem="VvS-dS-Ygc" secondAttribute="leading" id="ozG-nv-qZx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="EYa-Iv-XCB" id="XZk-BE-0ZS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FpL-n6-9gg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4213.04347826087" y="357.88043478260875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TLc-dd-ETA">

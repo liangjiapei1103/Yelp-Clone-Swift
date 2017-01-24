@@ -29,7 +29,6 @@ class BusinessCell: UITableViewCell {
             if let imageURL = business.imageURL {
                 restaurantImageView.setImageWith(imageURL)
             }
-            
         }
     }
     
