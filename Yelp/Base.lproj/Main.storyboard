@@ -171,25 +171,57 @@
                                     <constraint firstAttribute="height" constant="75" id="cNh-ZQ-oZC"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKt-AR-fBW">
+                                <rect key="frame" x="0.0" y="64" width="414" height="56"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BUK-JY-qUU">
+                                        <rect key="frame" x="19" y="14" width="376" height="29"/>
+                                        <segments>
+                                            <segment title="Best Match"/>
+                                            <segment title="Distance"/>
+                                            <segment title="Rating"/>
+                                        </segments>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="setFilterOption:" destination="2xI-yr-O5N" eventType="valueChanged" id="YtS-Ck-wxz"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" red="0.76862745098039209" green="0.070588235294117646" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BUK-JY-qUU" firstAttribute="centerY" secondItem="IKt-AR-fBW" secondAttribute="centerY" id="9L9-pb-MFf"/>
+                                    <constraint firstItem="BUK-JY-qUU" firstAttribute="centerX" secondItem="IKt-AR-fBW" secondAttribute="centerX" id="9Sr-bn-bff"/>
+                                    <constraint firstAttribute="height" constant="56" id="9Yd-bE-Lz5"/>
+                                    <constraint firstAttribute="width" constant="414" id="Rad-GH-VNT"/>
+                                    <constraint firstAttribute="trailing" secondItem="BUK-JY-qUU" secondAttribute="trailing" constant="19" id="VB5-n0-hDz"/>
+                                    <constraint firstItem="BUK-JY-qUU" firstAttribute="leading" secondItem="IKt-AR-fBW" secondAttribute="leading" constant="19" id="Yi6-zO-DDx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="iRa-pf-c2T" secondAttribute="trailing" id="0iT-QE-Fb1"/>
                             <constraint firstItem="iRa-pf-c2T" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="7wh-H7-vHB"/>
+                            <constraint firstItem="IKt-AR-fBW" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="85G-bT-dAX"/>
                             <constraint firstItem="iRa-pf-c2T" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="AOh-CC-r6U"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="JMS-tN-XSG" secondAttribute="bottom" id="BDt-Nd-HS2"/>
                             <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="b9I-hu-PQ4" secondAttribute="top" id="Dzp-WR-tmM"/>
+                            <constraint firstAttribute="trailing" secondItem="IKt-AR-fBW" secondAttribute="trailing" id="QWx-1Q-n2Z"/>
                             <constraint firstAttribute="trailing" secondItem="JMS-tN-XSG" secondAttribute="trailing" id="Qn3-qQ-bt2"/>
                             <constraint firstAttribute="trailing" secondItem="b9I-hu-PQ4" secondAttribute="trailing" id="f9u-sg-8BI"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="b9I-hu-PQ4" secondAttribute="bottom" id="l7O-eA-JGS"/>
                             <constraint firstItem="b9I-hu-PQ4" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="qEM-en-OC9"/>
                             <constraint firstItem="JMS-tN-XSG" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="rpV-of-SD1"/>
-                            <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="t0N-xn-ujN"/>
                             <constraint firstItem="b9I-hu-PQ4" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="t89-dE-J24"/>
+                            <constraint firstItem="IKt-AR-fBW" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="zNh-tN-jQs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Yelp" id="KZ1-eT-qo6">
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="V63-i1-ZNv"/>
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="V63-i1-ZNv">
+                            <connections>
+                                <action selector="toggleFilterOptionsView:" destination="2xI-yr-O5N" id="vNN-HJ-WeU"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Map" id="Q9j-yw-3iQ">
                             <connections>
                                 <action selector="flipView:" destination="2xI-yr-O5N" id="jTv-qm-siV"/>
@@ -197,12 +229,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="filterOptionsSegmentControl" destination="BUK-JY-qUU" id="OvD-DG-HOi"/>
+                        <outlet property="filterOptionsView" destination="IKt-AR-fBW" id="A7A-gb-i6K"/>
                         <outlet property="mapBarItem" destination="Q9j-yw-3iQ" id="RzQ-rK-z0y"/>
                         <outlet property="mapContainerView" destination="b9I-hu-PQ4" id="GO9-A8-wMZ"/>
                         <outlet property="mapView" destination="xN1-y0-Iyi" id="x9t-qH-WYE"/>
                         <outlet property="networkErrorView" destination="iRa-pf-c2T" id="so8-0O-zsZ"/>
                         <outlet property="showCurrentLocationButton" destination="HVK-V5-wZp" id="bde-t2-DpV"/>
                         <outlet property="tableView" destination="JMS-tN-XSG" id="nFZ-Ut-NAB"/>
+                        <outlet property="tableViewTopConstraint" destination="Dzp-WR-tmM" id="d8E-X6-12g"/>
                         <segue destination="ayb-s6-eco" kind="show" identifier="showDetailViaMap" id="Z96-YU-f6i"/>
                     </connections>
                 </viewController>

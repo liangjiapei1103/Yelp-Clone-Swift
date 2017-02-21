@@ -25,6 +25,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     var offset = 10
     
+    var sortingOption = YelpSortMode.bestMatched
+    
     var isSearching = false
     
     var searchText: String! = ""
@@ -53,6 +55,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var showCurrentLocationButton: UIButton!
     @IBOutlet weak var networkErrorView: UIView!
+    @IBOutlet weak var filterOptionsView: UIView!
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var filterOptionsSegmentControl: UISegmentedControl!
     
     var cardViews : (frontView: UIView, backView: UIView)!
     
@@ -121,6 +126,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                 }
             }
         }
+        
         
         
         showCurrentLocationButton.layer.cornerRadius = 25
@@ -211,6 +217,40 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func setFilterOption(_ sender: Any) {
+        
+        if filterOptionsSegmentControl.selectedSegmentIndex == 0 {
+            self.sortingOption = YelpSortMode.bestMatched
+        } else if filterOptionsSegmentControl.selectedSegmentIndex == 1 {
+            self.sortingOption = YelpSortMode.distance
+        } else {
+            self.sortingOption = YelpSortMode.highestRated
+        }
+        
+        doSearch(searchText: self.searchText)
+        
+        
+    }
+    
+    @IBAction func toggleFilterOptionsView(_ sender: Any) {
+
+        filterOptionsView.isHidden = !filterOptionsView.isHidden
+        
+        if filterOptionsView.isHidden {
+            
+            tableViewTopConstraint.constant = 0;
+            self.view.layoutIfNeeded()
+        } else {
+            
+            tableViewTopConstraint.constant = 56;
+            self.view.layoutIfNeeded()
+        }
+        
+        
+        
+    }
+    
+    
     func showDetailViaMap() {
         performSegue(withIdentifier: "showDetailViaMap", sender: self)
     }
@@ -224,6 +264,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             UIView.transition(with: self.view, duration: 0.7, options: .transitionFlipFromLeft, animations: {
                 
                 self.view.bringSubview(toFront: self.tableView)
+                self.view.bringSubview(toFront: self.filterOptionsView)
             }) { (success) in
                 if (success) {
                     self.mapBarItem.isEnabled = true
@@ -239,6 +280,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             UIView.transition(with: self.view, duration: 0.7, options: .transitionFlipFromRight, animations: {
                 
                 self.view.bringSubview(toFront: self.mapContainerView)
+                self.view.bringSubview(toFront: self.filterOptionsView)
                 
             }) { (success) in
                 if (success) {
@@ -269,7 +311,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Handle scroll behavior here
         if (!isMoreDateLoading && !isSearching && !noMoreResults && businesses != nil && reachability.isReachable) {
@@ -286,7 +327,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                 loadingMoreView?.frame = frame
                 loadingMoreView?.startAnimating()
                 
-                Business.searchWithTerm(term: self.searchText, offset: self.offset, radiusFilter: 40000, limit: 10, completion: { (businesses: [Business]?, error: Error?) -> Void in
+                Business.searchWithTerm(term: self.searchText, sort: self.sortingOption, offset: self.offset, radiusFilter: 40000, limit: 10, completion: { (businesses: [Business]?, error: Error?) -> Void in
                     
                         if let businesses = businesses {
                             
@@ -421,7 +462,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         // Display HUD right before the request is made
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
-        Business.searchWithTerm(term: searchText, offset: 0, radiusFilter: 40000, limit: 10, completion: { (businesses: [Business]?, error: Error?) -> Void in
+        Business.searchWithTerm(term: searchText, sort: self.sortingOption, offset: 0, radiusFilter: 40000, limit: 10, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             if businesses == nil {
                 
