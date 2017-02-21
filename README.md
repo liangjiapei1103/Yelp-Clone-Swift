@@ -50,11 +50,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 
 
-<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape2.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape2.png' title='Autolayout_landscape2' width='' alt='Autolayout_landscape2' />
 
-<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape.png' title='Autolayout_landscape' width='' alt='Autolayout_landscape' />
 
-<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape3.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape3.png' title='Autolayout_landscape3' width='' alt='Autolayout_landscape3' />
 
 ## Notes
 
