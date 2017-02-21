@@ -173,7 +173,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             let longitude = coordinate["longitude"] as! Double
             let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
-            mapItem.name = "Destination/Target Address or Name"
+            mapItem.name = business.name
             mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
         }
         

@@ -29,6 +29,9 @@ The following **additional** features are implemented:
 - [X] Implement annotationView.leftCalloutAccessaryView and rightCalloutAccessaryView
 - [X] Show Current location
 - [X] Customized navigation bar
+- [X] Customized launch screen
+- [X] Added App icon
+- [X] Use UserDefaults.standard to store search Text
 
 
 
