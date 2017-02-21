@@ -24,17 +24,20 @@ PODS:
     - AFNetworking/NSURLConnection (~> 2.6.0)
     - AFNetworking/NSURLSession (~> 2.6.0)
   - MBProgressHUD (1.0.0)
+  - ReachabilitySwift (3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - BDBOAuth1Manager
   - MBProgressHUD
+  - ReachabilitySwift
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BDBOAuth1Manager: cd5a5872f355ca38180d52ca2dd844f0b0c84797
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
 
-PODFILE CHECKSUM: 46079c46d5d74692a30b8bd32305445c3e1425d3
+PODFILE CHECKSUM: 521e1b15f33e7df5757883619ac28f0c709ca180
 
 COCOAPODS: 1.1.1

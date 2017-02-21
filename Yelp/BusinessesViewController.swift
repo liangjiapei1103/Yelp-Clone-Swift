@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import MBProgressHUD
+import ReachabilitySwift
 
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate{
     
@@ -42,18 +43,85 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     let defaults = UserDefaults.standard
     
+    // ReachabilitySwift Init
+    //declare this property where it won't go out of scope relative to your listener
+    let reachability = Reachability()!
+    
     @IBOutlet weak var mapBarItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var showCurrentLocationButton: UIButton!
+    @IBOutlet weak var networkErrorView: UIView!
     
     var cardViews : (frontView: UIView, backView: UIView)!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+        
+    }
+    
+    func reachabilityChanged(note: NSNotification) {
+        
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable {
+            if reachability.isReachableViaWiFi {
+                print("Reachable via WiFi")
+                networkErrorView.isHidden = true
+            } else {
+                print("Reachable via Cellular")
+                networkErrorView.isHidden = true
+            }
+        } else {
+            print("Network not reachable")
+            networkErrorView.isHidden = false
+        }
+    }
+    
+    
+    @IBAction func hideNetworkErrorView(_ sender: Any) {
+        networkErrorView.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mapView.delegate = self
+        
+        reachability.whenReachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            DispatchQueue.main.async {
+                if reachability.isReachableViaWiFi {
+                    print("Reachable via WiFi")
+                } else if reachability.isReachableViaWWAN {
+                    print("Reachable via Cellular")
+                } else {
+                    print("Not reachable")
+                }
+            }
+        }
+        reachability.whenUnreachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            DispatchQueue.main.async {
+                if reachability.isReachableViaWiFi {
+                    print("Reachable via WiFi")
+                } else if reachability.isReachableViaWWAN {
+                    print("Reachable via Cellular")
+                } else {
+                    print("Not reachable")
+                }
+            }
+        }
+        
         
         showCurrentLocationButton.layer.cornerRadius = 25
         showCurrentLocationButton.clipsToBounds = true
@@ -204,7 +272,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Handle scroll behavior here
-        if (!isMoreDateLoading && !isSearching && !noMoreResults) {
+        if (!isMoreDateLoading && !isSearching && !noMoreResults && businesses != nil && reachability.isReachable) {
             // Calculate the position of one screen length before the bottom of the results
             let scrollViewContentHeight = tableView.contentSize.height
             let scrollViewOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
@@ -332,6 +400,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func doSearch(searchText: String) {
         
+        if self.reachability.isReachable {
+            print("has network")
+        } else {
+            print("No network")
+            return
+        }
+        
         self.searchText = searchText
         annotations = []
         self.offset = 5;
@@ -348,43 +423,53 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         Business.searchWithTerm(term: searchText, offset: 0, radiusFilter: 40000, limit: 10, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
-            self.businesses = businesses
-            
-            self.filteredBusinesses = businesses
-            
-            // Hide HUD once the network request comes back (must be done on main UI thread)
-            MBProgressHUD.hide(for: self.view, animated: true)
-            
-            self.tableView.reloadData()
-            
-            if (businesses?.count)! < 10 {
-                let tableViewFooter = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 50))
-                tableViewFooter.backgroundColor = UIColor.white
-                let version = UILabel(frame: CGRect(x: 8, y: 15, width: self.tableView.frame.width, height: 30))
-                version.font = version.font.withSize(14)
-                version.text = "No more restaurants"
-                version.textColor = UIColor.lightGray
-                version.textAlignment = .center
+            if businesses == nil {
                 
-                tableViewFooter.addSubview(version)
+                // Hide HUD once the network request comes back (must be done on main UI thread)
+                MBProgressHUD.hide(for: self.view, animated: true)
                 
-                self.tableView.tableFooterView  = tableViewFooter
-                
-                self.noMoreResults = true
-            }
+                return
+            } else {
             
-            self.createMap(completionHandler: {(success) -> Void in
+                self.businesses = businesses
                 
-                if success {
-            
-                    self.fitMapViewToAnnotationList(annotations: self.annotations!)
+                self.filteredBusinesses = businesses
+                
+                // Hide HUD once the network request comes back (must be done on main UI thread)
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                self.tableView.reloadData()
+                
+                if (businesses?.count)! < 10 {
+                    let tableViewFooter = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 50))
+                    tableViewFooter.backgroundColor = UIColor.white
+                    let version = UILabel(frame: CGRect(x: 8, y: 15, width: self.tableView.frame.width, height: 30))
+                    version.font = version.font.withSize(14)
+                    version.text = "No more restaurants"
+                    version.textColor = UIColor.lightGray
+                    version.textAlignment = .center
                     
-                    self.mapView.selectAnnotation(self.annotations[0], animated: true)
+                    tableViewFooter.addSubview(version)
                     
-                    print("Success")
+                    self.tableView.tableFooterView  = tableViewFooter
+                    
+                    self.noMoreResults = true
                 }
                 
-            })
+                self.createMap(completionHandler: {(success) -> Void in
+                    
+                    if success {
+                        
+                        self.fitMapViewToAnnotationList(annotations: self.annotations!)
+                        
+                        self.mapView.selectAnnotation(self.annotations[0], animated: true)
+                        
+                        print("Success")
+                    }
+                    
+                })
+                
+            }
         }
         )
     }
@@ -505,7 +590,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
         
         for business in businesses {
-            if business != nil {
                 if business.name! == annotation.title! {
                     if business.imageURL == nil {
                         leftIconView.image = UIImage(named: "restaurant")
@@ -527,7 +611,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                     annotationView?.rightCalloutAccessoryView?.addGestureRecognizer(tapGestureRecognizer2)
 
                 }
-            }
         }
         
         return annotationView

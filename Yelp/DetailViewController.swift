@@ -176,9 +176,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         if !hasCalculatedETA {
-            print(1111111111)
             if let location = self.locations?.first {
-                print(2222222222)
                 let currentCoordinate = location.coordinate
                 let currentPlacemark = MKPlacemark(coordinate: currentCoordinate)
                 

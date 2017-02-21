@@ -126,10 +126,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             let currentCoordinate = location.coordinate
             let currentPlacemark = MKPlacemark(coordinate: currentCoordinate)
             
-            print(2222222222)
             if let coordinate = business.coordinate {
                 
-                print(3333333333)
                 
                 let directionsRequest = MKDirectionsRequest()
                 
