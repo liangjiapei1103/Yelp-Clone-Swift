@@ -32,6 +32,8 @@ The following **additional** features are implemented:
 - [X] Customized launch screen
 - [X] Added App icon
 - [X] Use UserDefaults.standard to store search Text
+- [X] Implement Network reachability checking function
+- [X] Implement filter options: best matched, distance, highest rating
 
 
 
