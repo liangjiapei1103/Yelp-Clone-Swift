@@ -205,10 +205,10 @@
                             <constraint firstItem="IKt-AR-fBW" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="85G-bT-dAX"/>
                             <constraint firstItem="iRa-pf-c2T" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="AOh-CC-r6U"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="JMS-tN-XSG" secondAttribute="bottom" id="BDt-Nd-HS2"/>
-                            <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="b9I-hu-PQ4" secondAttribute="top" id="Dzp-WR-tmM"/>
                             <constraint firstAttribute="trailing" secondItem="IKt-AR-fBW" secondAttribute="trailing" id="QWx-1Q-n2Z"/>
                             <constraint firstAttribute="trailing" secondItem="JMS-tN-XSG" secondAttribute="trailing" id="Qn3-qQ-bt2"/>
                             <constraint firstAttribute="trailing" secondItem="b9I-hu-PQ4" secondAttribute="trailing" id="f9u-sg-8BI"/>
+                            <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="kdF-Dq-iOI"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="b9I-hu-PQ4" secondAttribute="bottom" id="l7O-eA-JGS"/>
                             <constraint firstItem="b9I-hu-PQ4" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="qEM-en-OC9"/>
                             <constraint firstItem="JMS-tN-XSG" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="rpV-of-SD1"/>
@@ -234,10 +234,11 @@
                         <outlet property="mapBarItem" destination="Q9j-yw-3iQ" id="RzQ-rK-z0y"/>
                         <outlet property="mapContainerView" destination="b9I-hu-PQ4" id="GO9-A8-wMZ"/>
                         <outlet property="mapView" destination="xN1-y0-Iyi" id="x9t-qH-WYE"/>
+                        <outlet property="mapViewTopConstraint" destination="t89-dE-J24" id="yu5-eV-dUc"/>
                         <outlet property="networkErrorView" destination="iRa-pf-c2T" id="so8-0O-zsZ"/>
                         <outlet property="showCurrentLocationButton" destination="HVK-V5-wZp" id="bde-t2-DpV"/>
                         <outlet property="tableView" destination="JMS-tN-XSG" id="nFZ-Ut-NAB"/>
-                        <outlet property="tableViewTopConstraint" destination="Dzp-WR-tmM" id="d8E-X6-12g"/>
+                        <outlet property="tableViewTopConstraint" destination="kdF-Dq-iOI" id="lcp-mY-dl6"/>
                         <segue destination="ayb-s6-eco" kind="show" identifier="showDetailViaMap" id="Z96-YU-f6i"/>
                     </connections>
                 </viewController>

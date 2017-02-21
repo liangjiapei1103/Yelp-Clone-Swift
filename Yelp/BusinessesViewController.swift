@@ -57,6 +57,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var filterOptionsView: UIView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapViewTopConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var filterOptionsSegmentControl: UISegmentedControl!
     
     var cardViews : (frontView: UIView, backView: UIView)!
@@ -239,10 +241,12 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         if filterOptionsView.isHidden {
             
             tableViewTopConstraint.constant = 0;
+            mapViewTopConstraint.constant = 0;
             self.view.layoutIfNeeded()
         } else {
             
             tableViewTopConstraint.constant = 56;
+            mapViewTopConstraint.constant = 56;
             self.view.layoutIfNeeded()
         }
         
@@ -265,6 +269,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                 
                 self.view.bringSubview(toFront: self.tableView)
                 self.view.bringSubview(toFront: self.filterOptionsView)
+                self.view.bringSubview(toFront: self.networkErrorView)
             }) { (success) in
                 if (success) {
                     self.mapBarItem.isEnabled = true
@@ -281,6 +286,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                 
                 self.view.bringSubview(toFront: self.mapContainerView)
                 self.view.bringSubview(toFront: self.filterOptionsView)
+                self.view.bringSubview(toFront: self.networkErrorView)
                 
             }) { (success) in
                 if (success) {
