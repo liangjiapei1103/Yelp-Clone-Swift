@@ -2,7 +2,7 @@
 
 **Yelp-Clone** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **X** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -21,7 +21,16 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] Implement function to view all annotations when showing the map.
+- [X] Implement function to show current location and all annotations.
+- [X] Implement function to open map and get direction from current location to destination restaurant
+- [X] Implement function to calculate Estimated Time Arrival and show it on detail page
+- [X] Implement function to call restaurant phone number on detail page
+- [X] Implement annotationView.leftCalloutAccessaryView and rightCalloutAccessaryView
+- [X] Show Current location
+- [X] Customized navigation bar
+
+
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
