@@ -44,14 +44,18 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     }
     
     func searchWithTerm(_ term: String, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
-        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, offset: nil, completion: completion)
+        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, offset: nil, radiusFilter: 0, limit: 20, completion: completion)
     }
     
     func searchWithTerm(_ term: String, offset: Int, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
-        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, offset: offset, completion: completion)
+        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, offset: offset, radiusFilter: 0, limit: 20, completion: completion)
     }
     
-    func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, offset: Int?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(_ term: String, offset: Int, radiusFilter: Int, limit: Int, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+        return searchWithTerm(term, sort: nil, categories: nil, deals: nil, offset: offset, radiusFilter: radiusFilter, limit: limit, completion: completion)
+    }
+    
+    func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, offset: Int?, radiusFilter: Int, limit: Int, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
         // Default the location to San Francisco
@@ -73,6 +77,15 @@ class YelpClient: BDBOAuth1RequestOperationManager {
             parameters["offset"] = offset! as AnyObject?
         }
         
+        if radiusFilter != 0 {
+            parameters["radius_filter"] = radiusFilter as AnyObject?
+        }
+        
+        if limit != 0 {
+            parameters["limit"] = limit as AnyObject?
+        }
+        
+        
         print(parameters)
         
         return self.get("search", parameters: parameters,
@@ -81,7 +94,11 @@ class YelpClient: BDBOAuth1RequestOperationManager {
                                 let dictionaries = response["businesses"] as? [NSDictionary]
                                 if dictionaries != nil {
                                     completion(Business.businesses(array: dictionaries!), nil)
+                                } else {
+                                    print("No businesses in response")
                                 }
+                            } else {
+                                print("No response received")
                             }
                         },
                         failure: { (operation: AFHTTPRequestOperation?, error: Error) -> Void in

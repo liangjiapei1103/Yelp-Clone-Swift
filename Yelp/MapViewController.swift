@@ -11,14 +11,31 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var statusBarBackgroundView: UIView!
+    @IBOutlet weak var showCurrentLocationButton: UIButton!
 
     var business: Business!
     
     var locationManager: CLLocationManager!
     
+    var locations: [CLLocation]?
+    
+    var hasShownCurrentLocation = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        statusBarBackgroundView.backgroundColor = UIColor(red: CGFloat(196/255.0), green: CGFloat(18/255.0), blue: CGFloat(0), alpha: CGFloat(1))
+        
+        navigationBar.tintColor = UIColor.white
+        navigationBar.barTintColor = UIColor(red: CGFloat(196/255.0), green: CGFloat(18/255.0), blue: CGFloat(0), alpha: CGFloat(1))
+        navigationBar.topItem?.title = business.name
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        
+        showCurrentLocationButton.layer.cornerRadius = 25
+        showCurrentLocationButton.clipsToBounds = true
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -30,12 +47,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             let latitude = coordinate["latitude"] as! Double
             let longitude = coordinate["longitude"] as! Double
             let centerLocation = CLLocation(latitude: latitude, longitude: longitude)
-            
+            goToLocation(location: centerLocation)
             addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         }
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,8 +61,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = "\(business.name!)"
+        annotation.title = "\(business.fullAddress!)"
         mapView.addAnnotation(annotation)
+    }
+    
+    func goToLocation(location: CLLocation) {
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(location.coordinate, span)
+        mapView.setRegion(region, animated: false)
     }
     
     
@@ -58,14 +78,110 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    @IBAction func showCurrentLocation(_ sender: Any) {
+        
+        let mapEdgePadding = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+        
+        var zoomRect: MKMapRect = MKMapRectNull
+        
+         if let location = self.locations?.first {
+            
+            let userLocationPoint: MKMapPoint = MKMapPointForCoordinate(location.coordinate)
+            let userRect: MKMapRect = MKMapRectMake(userLocationPoint.x, userLocationPoint.y, 0.05, 0.05)
+            
+            zoomRect = userRect
+            
+            if let coordinate = business.coordinate {
+                
+                let latitude = coordinate["latitude"] as! Double
+                let longitude = coordinate["longitude"] as! Double
+                let businessLocation = CLLocation(latitude: latitude, longitude: longitude)
+                
+                let businessLocationPoint: MKMapPoint = MKMapPointForCoordinate(businessLocation.coordinate)
+                
+                let businessRect: MKMapRect = MKMapRectMake(businessLocationPoint.x, businessLocationPoint.y, 0.05, 0.05)
+                
+                zoomRect = MKMapRectUnion(zoomRect, businessRect)
+                
+                mapView.setVisibleMapRect(zoomRect, edgePadding: mapEdgePadding, animated: true)
+            }
+         }
+    }
+    
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            let span = MKCoordinateSpanMake(0.1, 0.1)
-            let region = MKCoordinateRegionMake(location.coordinate, span)
-            mapView.setRegion(region, animated: false)
+        
+        self.locations = locations
+        
+        if !hasShownCurrentLocation {
+            self.hasShownCurrentLocation = true
+            showCurrentLocation(self)
         }
     }
+    
+    @IBAction func close(_ sender: Any) {
+        
+        if let location = self.locations?.first {
+            let currentCoordinate = location.coordinate
+            let currentPlacemark = MKPlacemark(coordinate: currentCoordinate)
+            
+            print(2222222222)
+            if let coordinate = business.coordinate {
+                
+                print(3333333333)
+                
+                let directionsRequest = MKDirectionsRequest()
+                
+                let latitude = coordinate["latitude"] as! Double
+                let longitude = coordinate["longitude"] as! Double
+                
+                let businessPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(latitude, longitude), addressDictionary: nil)
+                
+                directionsRequest.source = MKMapItem(placemark: currentPlacemark)
+                directionsRequest.destination = MKMapItem(placemark: businessPlacemark)
+                
+                directionsRequest.transportType = MKDirectionsTransportType.automobile
+                
+                let directions = MKDirections(request: directionsRequest)
+                
+                print("calculate")
+                
+                directions.calculateETA(completionHandler: { (response, error) in
+                    print("Estimated arraival time:")
+                    print(response!.expectedTravelTime)
+                })
+                
+                
+            }
+            
+            
+            
+            
+        }
 
+        
+        dismiss(animated: true, completion: nil)
+    }
+
+    
+    @IBAction func openMap(_ sender: Any) {
+        
+        
+        if let coordinate = self.business.coordinate {
+            let latitude = coordinate["latitude"] as! Double
+            let longitude = coordinate["longitude"] as! Double
+            let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+            mapItem.name = "Destination/Target Address or Name"
+            mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        }
+        
+        
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

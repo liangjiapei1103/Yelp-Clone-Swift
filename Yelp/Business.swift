@@ -11,15 +11,23 @@ import UIKit
 class Business: NSObject {
     let name: String?
     let address: String?
+    let fullAddress: String?
+    let city: String?
     let imageURL: URL?
     let categories: String?
     let distance: String?
     let ratingImageURL: URL?
     let reviewCount: NSNumber?
     let coordinate: NSDictionary?
+    let phone: String?
     
     init(dictionary: NSDictionary) {
+        
+        // print(dictionary)
+        
         name = dictionary["name"] as? String
+        
+        phone = dictionary["display_phone"] as? String
         
         let imageURLString = dictionary["image_url"] as? String
         if imageURLString != nil {
@@ -30,6 +38,8 @@ class Business: NSObject {
         
         let location = dictionary["location"] as? NSDictionary
         var address = ""
+        var city = ""
+        var fullAddress = ""
         if location != nil {
             let addressArray = location!["address"] as? NSArray
             if addressArray != nil && addressArray!.count > 0 {
@@ -44,15 +54,36 @@ class Business: NSObject {
                 address += neighborhoods![0] as! String
             }
             
-            coordinate = location!["coordinate"] as! NSDictionary
+            if let cityName = location!["city"] as? String {
+                city = cityName
+            }
             
-            print(coordinate!)
+            if let fullAddressArray = location!["display_address"] as? NSArray {
+                for i in 0...fullAddressArray.count-1 {
+                    if fullAddress != "" {
+                        fullAddress = "\(fullAddress), \(fullAddressArray[i])"
+                    } else {
+                        fullAddress = "\(fullAddressArray[i])"
+                    }
+                    
+                }
+                print("Full address: \(fullAddress)")
+            }
+            
+            
+            coordinate = location!["coordinate"] as? NSDictionary
+            
+            // print(coordinate!)
+            // print(coordinate!["longitude"])
+            
             
         } else {
             coordinate = nil
         }
         
         self.address = address
+        self.city = city
+        self.fullAddress = fullAddress
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
@@ -101,7 +132,11 @@ class Business: NSObject {
         _ = YelpClient.sharedInstance.searchWithTerm(term, offset: offset, completion: completion)
     }
     
-    class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, offset: Int?, completion: @escaping ([Business]?, Error?) -> Void) -> Void {
-        _ = YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, offset: offset, completion: completion)
+    class func searchWithTerm(term: String, offset: Int, radiusFilter: Int, limit: Int, completion: @escaping ([Business]?, Error?) -> Void) {
+        _ = YelpClient.sharedInstance.searchWithTerm(term, offset: offset, radiusFilter: radiusFilter, limit: limit, completion: completion)
+    }
+    
+    class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, offset: Int?, radiusFilter: Int?, limit: Int?, completion: @escaping ([Business]?, Error?) -> Void) -> Void {
+        _ = YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, offset: offset, radiusFilter: radiusFilter!, limit: limit!, completion: completion)
     }
 }

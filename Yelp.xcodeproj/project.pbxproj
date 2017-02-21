@@ -17,6 +17,12 @@
 		22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */; };
 		31D95BCBCA38716181E686D3 /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */; };
 		47848697133B87663A122E3D /* Pods_YelpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */; };
+		530A30C71E5B8016003D52AC /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A30C61E5B8016003D52AC /* InfoTableViewCell.swift */; };
+		530A30C91E5B81BC003D52AC /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A30C81E5B81BC003D52AC /* AddressTableViewCell.swift */; };
+		530A30CB1E5B885C003D52AC /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A30CA1E5B885C003D52AC /* MapTableViewCell.swift */; };
+		530A30CD1E5B9A8B003D52AC /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A30CC1E5B9A8B003D52AC /* CallTableViewCell.swift */; };
+		537396F71E5BABB9000FC107 /* DirectionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537396F61E5BABB9000FC107 /* DirectionsTableViewCell.swift */; };
+		537396F91E5BDA32000FC107 /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537396F81E5BDA32000FC107 /* CalloutView.swift */; };
 		53A0A66F1E356A10005AF59E /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0A66E1E356A10005AF59E /* BusinessCell.swift */; };
 		53A0A6711E36BD91005AF59E /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0A6701E36BD91005AF59E /* InfiniteScrollActivityView.swift */; };
 		53A0A6731E36E7BB005AF59E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0A6721E36E7BB005AF59E /* DetailViewController.swift */; };
@@ -47,6 +53,12 @@
 		222D8A7C19CCFAE000D2DB53 /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		22AAAA981AEA0A9700A544AF /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
+		530A30C61E5B8016003D52AC /* InfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		530A30C81E5B81BC003D52AC /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		530A30CA1E5B885C003D52AC /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
+		530A30CC1E5B9A8B003D52AC /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
+		537396F61E5BABB9000FC107 /* DirectionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsTableViewCell.swift; sourceTree = "<group>"; };
+		537396F81E5BDA32000FC107 /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
 		53A0A66E1E356A10005AF59E /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		53A0A6701E36BD91005AF59E /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
 		53A0A6721E36E7BB005AF59E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +193,12 @@
 			children = (
 				53A0A66E1E356A10005AF59E /* BusinessCell.swift */,
 				53A0A6701E36BD91005AF59E /* InfiniteScrollActivityView.swift */,
+				530A30C61E5B8016003D52AC /* InfoTableViewCell.swift */,
+				530A30C81E5B81BC003D52AC /* AddressTableViewCell.swift */,
+				530A30CA1E5B885C003D52AC /* MapTableViewCell.swift */,
+				530A30CC1E5B9A8B003D52AC /* CallTableViewCell.swift */,
+				537396F61E5BABB9000FC107 /* DirectionsTableViewCell.swift */,
+				537396F81E5BDA32000FC107 /* CalloutView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -402,12 +420,18 @@
 			files = (
 				53A0A6711E36BD91005AF59E /* InfiniteScrollActivityView.swift in Sources */,
 				53A0A66F1E356A10005AF59E /* BusinessCell.swift in Sources */,
+				530A30C91E5B81BC003D52AC /* AddressTableViewCell.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
+				530A30C71E5B8016003D52AC /* InfoTableViewCell.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
+				530A30CB1E5B885C003D52AC /* MapTableViewCell.swift in Sources */,
 				222D8A7D19CCFAE000D2DB53 /* YelpClient.swift in Sources */,
 				222D8A5B19CCF9F900D2DB53 /* AppDelegate.swift in Sources */,
+				530A30CD1E5B9A8B003D52AC /* CallTableViewCell.swift in Sources */,
 				53A0A6731E36E7BB005AF59E /* DetailViewController.swift in Sources */,
 				53A0A6751E36FA2B005AF59E /* MapViewController.swift in Sources */,
+				537396F71E5BABB9000FC107 /* DirectionsTableViewCell.swift in Sources */,
+				537396F91E5BDA32000FC107 /* CalloutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,7 +511,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -527,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
