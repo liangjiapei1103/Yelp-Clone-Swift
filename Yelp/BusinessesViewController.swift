@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import MBProgressHUD
 
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate{
     
@@ -342,11 +343,17 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         defaults.set(searchText, forKey: "searchText")
         
+        // Display HUD right before the request is made
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         Business.searchWithTerm(term: searchText, offset: 0, radiusFilter: 40000, limit: 10, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
             
             self.filteredBusinesses = businesses
+            
+            // Hide HUD once the network request comes back (must be done on main UI thread)
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             self.tableView.reloadData()
             

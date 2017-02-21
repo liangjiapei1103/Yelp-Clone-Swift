@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JMS-tN-XSG">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessCell" rowHeight="130" id="Cs4-t7-hd2" customClass="BusinessCell" customModule="Yelp" customModuleProvider="target">
@@ -144,12 +144,13 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="JMS-tN-XSG" secondAttribute="bottom" id="BDt-Nd-HS2"/>
+                            <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="b9I-hu-PQ4" secondAttribute="top" constant="-64" id="Dzp-WR-tmM"/>
                             <constraint firstAttribute="trailing" secondItem="JMS-tN-XSG" secondAttribute="trailing" id="Qn3-qQ-bt2"/>
-                            <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="cg5-hi-6vx"/>
                             <constraint firstAttribute="trailing" secondItem="b9I-hu-PQ4" secondAttribute="trailing" id="f9u-sg-8BI"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="b9I-hu-PQ4" secondAttribute="bottom" id="l7O-eA-JGS"/>
                             <constraint firstItem="b9I-hu-PQ4" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="qEM-en-OC9"/>
                             <constraint firstItem="JMS-tN-XSG" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="rpV-of-SD1"/>
+                            <constraint firstItem="JMS-tN-XSG" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" constant="-64" id="t0N-xn-ujN"/>
                             <constraint firstItem="b9I-hu-PQ4" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="t89-dE-J24"/>
                         </constraints>
                     </view>
