@@ -48,7 +48,13 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/week3_assignment_walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
+<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape2.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='https://github.com/liangjiapei1103/Yelp-Clone-Swift/blob/master/Autolayout_landscape3.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Notes
 
